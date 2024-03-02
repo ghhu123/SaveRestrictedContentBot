@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master  # Change this to your main branch name
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install Docker Compose
+        run: sudo apt install docker-compose -y
+
+      - name: Build and run Docker containers
+        run: sudo docker-compose up --build
+
+      - name: Update apt
+        run: sudo apt update
+
+      - name: Install necessary packages
+        run: sudo apt install -y ffmpeg git python3-pip
+
+      - name: Clone the repository
+        run: git clone https://github.com/ghhu123/SaveRestrictedContentBot.git
+
+      - name: Navigate to the repository directory
+        run: cd SaveRestrictedContentBot
+
+      - name: Install Python dependencies
+        run: pip3 install -r requirements.txt
+
+      - name: Run the Python script
+        run: python3 -m main
