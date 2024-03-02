@@ -14,8 +14,6 @@ jobs:
       - name: Install Docker Compose
         run: sudo apt install docker-compose -y
 
-      - name: Build and run Docker containers
-        run: sudo docker-compose up --build
 
       - name: Update apt
         run: sudo apt update
